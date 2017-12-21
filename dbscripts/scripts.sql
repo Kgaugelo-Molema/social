@@ -25,3 +25,7 @@ ALTER TABLE Members ADD CONSTRAINT FK_MemberSocialClubID FOREIGN KEY (SocialClub
 -- INSERT INTO SocialClub (ID, Name) VALUES (@UUID, 'My Club');
 -- INSERT INTO Members (ID, Name, Surname, SocialClubId)
 -- VALUES (UUID(), 'KG', 'Molema', @UUID);						
+
+-- SELECT s.Name, COUNT(*) FROM SocialClub s
+-- JOIN Members m ON m.SocialClubID = s.ID
+-- GROUP BY s.Name

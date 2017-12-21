@@ -12,11 +12,11 @@
             var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                    labels: ['Property','Forex','Shares'],					
+                    labels: ['Actual','Target'],					
                     datasets: [
                         {
-                            label: 'Investments',
-                            data: [0.5,0.2,0.3],						
+                            label: 'Hammankraal Social',
+                            data: [0.3,0.7],						
                             backgroundColor: [  'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',
                                                 'rgba(255, 206, 86, 0.2)',
