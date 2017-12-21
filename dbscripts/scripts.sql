@@ -24,4 +24,4 @@ ALTER TABLE Members ADD CONSTRAINT FK_MemberSocialClubID FOREIGN KEY (SocialClub
 -- SET @UUID = UUID();
 -- INSERT INTO SocialClub (ID, Name) VALUES (@UUID, 'My Club');
 -- INSERT INTO Members (ID, Name, Surname, SocialClubId)
--- VALUES (UUID(), 'KG', 'Molema', @UUID);
+-- VALUES (UUID(), 'KG', 'Molema', @UUID);						

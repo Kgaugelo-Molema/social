@@ -92,6 +92,20 @@ button:focus { outline: none; }
 	height: 750px;	
 }
 
+.tm-detail {
+    background: none;
+    color: #d9534f;
+}
+
+.tm-detail select {
+    width: 200px;
+}
+
+.tm-detail p {
+    font-size: 24px;
+    color: inherit;
+}
+
 @media (max-width: 1800px) {
 	.tm-intro {	background-size: 1800px 750px; }
 }
