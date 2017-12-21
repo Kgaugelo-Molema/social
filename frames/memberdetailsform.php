@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "gateway1_socuser";
-$password = "socuser123";
-$dbname = "gateway1_social";
+$username = "gateway1_tasuser";
+$password = "tasuser123";
+$dbname = "gateway1_tas";
 $mysql_table = "members";
 
 $conn = new mysqli($servername, $username, $password, '');
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
 //////////////////////Get social clubs//////////////////////
-$sql = "SELECT ID, Name, CreationDate FROM SocialClub ORDER BY Name";
+$sql = "SELECT ID, Name, CreationDate FROM socialclub ORDER BY Name";
 $result = $conn->query($sql);
 if (!$conn->query($sql)) {
     echo "$sql<br>";

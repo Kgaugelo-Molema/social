@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "gateway1_socuser";
-$password = "socuser123";
-$dbname = "gateway1_social";
+$username = "gateway1_tasuser";
+$password = "tasuser123";
+$dbname = "gateway1_tas";
 $mysql_table = "socialclub";
 
 $conn = new mysqli($servername, $username, $password, '');
