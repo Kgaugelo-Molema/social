@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="../img/tm-lumino-logo.png">
         <link rel="stylesheet" href="../css/templatemo-style.css">
-        <link rel="stylesheet" href="../css/bootstrap.min.css">                                      <!-- Bootstrap style -->
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <script src="../js/scripts.js"></script>
     </head>
     <body>
         <div class="tm-intro tm-detail">
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                     <td><input type="text" placeholder="Name" name="clubname" autofocus></td>
                                 </tr>
                                 <tr>
-                                    <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit"></td>
+                                    <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit" onclick="return checkclubname(this.form)"></td>
                                 </tr>
                             </tbody>
                         </table>

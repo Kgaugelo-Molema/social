@@ -17,26 +17,29 @@ if (!$conn->select_db($dbname)) {
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    $membername = $_POST["membername"];
-    $membersurname = $_POST["membersurname"];
-    $clubid = $_POST["clubid"];
-    $sqlText = "SELECT ID FROM $mysql_table WHERE Name = '$membername' AND Surname = '$membersurname' AND SocialClubId = '$clubid'";
-    $result = $conn->query($sqlText);
-    if (!$conn->query($sqlText)) {
-        echo "$sqltext<br>";
-        die( "Error: Failed to get data from '$mysql_table' ".$conn->error."<br>");
-    }
-
-    if ($result->num_rows > 0) {
-        $msg = "$membername $membersurname is already a member of the social club.";
-    }
-    else {
-        $sqlText = "INSERT INTO $mysql_table (ID, Name, Surname, SocialClubID) VALUES (UUID(), '$membername', '$membersurname', '$clubid');";
+    if ($_POST["membername"] != "")
+    {
+        $membername = $_POST["membername"];
+        $membersurname = $_POST["membersurname"];
+        $clubid = $_POST["clubid"];
+        $sqlText = "SELECT ID FROM $mysql_table WHERE Name = '$membername' AND Surname = '$membersurname' AND SocialClubId = '$clubid'";
+        $result = $conn->query($sqlText);
         if (!$conn->query($sqlText)) {
             echo "$sqltext<br>";
-            die( "Error: Failed to insert data into table '$mysql_table' ".$conn->error."<br>");
-        }        
-        $notify = "Member added to social club.";
+            die( "Error: Failed to get data from '$mysql_table' ".$conn->error."<br>");
+        }
+    
+        if ($result->num_rows > 0) {
+            $msg = "$membername $membersurname is already a member of the social club.";
+        }
+        else {
+            $sqlText = "INSERT INTO $mysql_table (ID, Name, Surname, SocialClubID) VALUES (UUID(), '$membername', '$membersurname', '$clubid');";
+            if (!$conn->query($sqlText)) {
+                echo "$sqltext<br>";
+                die( "Error: Failed to insert data into table '$mysql_table' ".$conn->error."<br>");
+            }        
+            $notify = "Member added to social club.";
+        }
     }
 }
 
@@ -56,7 +59,8 @@ if (!$conn->query($sql)) {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="../img/tm-lumino-logo.png">
         <link rel="stylesheet" href="../css/templatemo-style.css">
-        <link rel="stylesheet" href="../css/bootstrap.min.css">                                      <!-- Bootstrap style -->
+        <link rel="stylesheet" href="../css/bootstrap.min.css">                                    
+        <script src="../js/scripts.js"></script>
     </head>
     <body>
         <div class="tm-intro tm-detail">
@@ -97,7 +101,7 @@ if (!$conn->query($sql)) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit"></td>
+                                    <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit" onclick="return checkmemberfields(this.form)"></td>
                                 </tr>
                             </tbody>
                         </table>
