@@ -1,3 +1,39 @@
+<?php
+$servername = "localhost";
+$username = "gateway1_tasuser";
+$password = "tasuser123";
+$dbname = "gateway1_tas";
+$mysql_table = "socialclubstats";
+
+$conn = new mysqli($servername, $username, $password, '');
+$msg = "";
+$notify = "";
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error."<br>");
+} 
+if (!$conn->select_db($dbname)) {
+	die( "Error: Failed to select database '$dbname' ".$conn->error."<br>");
+}
+$clubName = "";
+$actual = 0;
+$target = 0;
+if (isset($_GET['clubname'])) {
+    $clubName = $_GET['clubname'];
+    $sqlText = "SELECT ID, Name, Actual, Target FROM $mysql_table WHERE Name = '$clubName'";
+    $result = $conn->query($sqlText);
+    if (!$conn->query($sqlText)) {
+        echo "$sqltext<br>";
+        die( "Error: Failed to get data from '$mysql_table' ".$conn->error."<br>");
+    }
+    while($row = $result->fetch_assoc()) {
+        $actual = $row["Actual"];
+        $target = $row["Target"] - $row["Actual"];
+    }
+}
+
+?>
+
 <html>
 <head>
     <script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script>
@@ -15,8 +51,10 @@
                     labels: ['Actual','Target'],					
                     datasets: [
                         {
-                            label: 'Hammankraal Social',
-                            data: [0.3,0.7],						
+<?php                            
+                            echo "label: '$clubName',";
+                            echo "data: [$actual,$target],";						
+?>                                    
                             backgroundColor: [  'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',
                                                 'rgba(255, 206, 86, 0.2)',

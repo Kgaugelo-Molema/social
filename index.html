@@ -64,7 +64,6 @@
 
            <div class="row">
                 <div class="tm-intro">
-
                     <section id="tm-section-1">                        
                         <div class="tm-container text-xs-center tm-section-1-inner">
 <!--                            <img src="img/tm-lumino-logo.png" alt="Logo" class="tm-logo">-->
@@ -78,10 +77,21 @@
                                     <tr>
                                         <td><input id="password" type="password" placeholder="Password"></td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <script>
+                                                function setUrl()
+                                                {   //this forces the address on the browser
+                                                    document.location = "./#register";
+                                                }
+                                            </script>
+                                            <a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>    
+                                            <a class="btn tm-light-blue-bordered-btn" onclick="return setUrl()">Register</a>                                                
+                                        </td>
+                                    </tr>
                                 </table>                                
                             </form>
                             <br>
-                            <a href="#tm-section-2" class="tm-intro-link" onclick="return setName()">Login</a>    
                         </div>                                               
                    </section>
 
@@ -141,27 +151,16 @@
                         <div class="tm-news-item">
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-item-img-container">
-                            <iframe id="noproj" src="frames/investmentgraph.php" style="width:500px;height:380px" frameborder="0" scrolling="no">
+                            <iframe id="invgraph" src="frames/investmentgraph.php?clubname=Hammanskraal%20Social" style="width:500px;height:380px" frameborder="0" scrolling="no">
                             </iframe>
 <!--                                <img src="img/tm-600x300-03.jpg" alt="Image" class="img-fluid tm-news-item-img">-->
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container">
-                                <h2 class="tm-news-title dark-gray-text">Hammanskraal Social</h2>
-                                <table>
-                                    <tr>
-                                        <td><a href="#">Actual members joined: </a></td>
-                                        <td>&nbsp;</td>
-                                        <td><a href="#">30</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Target total members: </a></td>
-                                        <td>&nbsp;</td>
-                                        <td><a href="#">70</a></td>
-                                    </tr>
-                                </table>
+                                <iframe id="invdata" src="frames/investmentdata.php?clubname=Hammanskraal%20Social" style="width:300px;height:160px" frameborder="0" scrolling="no">
+                                </iframe><br><br>                                
 <!--                                <p class="tm-news-text">Credit goes to <a rel="nofollow" href="http://unsplash.com" target="_parent">Unsplash</a> for images used in this website template. Nulla sit amet tristique lacus. Etiam blandit ex vitae mauris gravida.</p>-->
-                                <a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Read</a>
+                                <a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Details</a>
                             </div>
                         </div>
                     </div>                    
@@ -244,7 +243,7 @@
                 </section>
 
             </div> <!-- row -->
-
+            
             <div class="row gray-bg">
 
                 <section id="tm-section-4" class="tm-section">
@@ -282,6 +281,16 @@
                     </div>                    
                 </section>
 
+                <div id="register" class="modalDialog">
+                    <div>
+                        <a href="#close" title="Close" class="close">X</a>
+                        <center>
+                        <iframe src="frames/registrationform.php" frameborder="0" scrolling="no" style="height: 300px">
+                        </iframe>
+                        </center>
+                    </div>                                                
+                </div> 
+
                 <!-- footer -->
                 <footer class="tm-footer">                
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -292,7 +301,6 @@
             </div> <!-- row -->
            
         </div> <!-- container-fluid -->
-        
         <!-- load JS files -->
         
         <script src="js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
@@ -399,7 +407,8 @@
             });
             window.setInterval(function() {reloadFrame()},60000);
             function reloadFrame() {
-                document.getElementById('noproj').contentWindow.location = "frames/investmentgraph.php";
+                document.getElementById('invgraph').contentWindow.location = "frames/investmentgraph.php?clubname=Hammanskraal%20Social";
+                document.getElementById('invdata').contentWindow.location = "frames/investmentdata.php?clubname=Hammanskraal%20Social";
             }
 
         </script>             
