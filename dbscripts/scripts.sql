@@ -2,11 +2,11 @@ CREATE DATABASE IF NOT EXISTS gateway1_social;
 CREATE USER 'gateway1_socuser'@'localhost' IDENTIFIED BY 'socuser123';
 GRANT ALL ON gateway1_social.* TO 'gateway1_socuser'@'localhost';
 
-CREATE TABLE IF NOT EXISTS `socialclub` (
-  `ID` varchar(50) NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
-  `Name` varchar(100) NOT NULL,
-  `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`)
+CREATE TABLE IF NOT EXISTS socialclub (
+  ID varchar(50) NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
+  Name varchar(100) NOT NULL,
+  CreationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS ClubMetaData (
@@ -14,39 +14,53 @@ CREATE TABLE IF NOT EXISTS ClubMetaData (
 	SocialClubID varchar(50) NOT NULL,
 	MonthlyMembershipTarget smallint,
     CreationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`ID`)
+    PRIMARY KEY (ID)
 );
 
 ALTER TABLE ClubMetaData ADD CONSTRAINT FK_MetaDataSocialClubID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
 -- Dummy data
--- INSERT INTO `clubmetadata`(`SocialClubID`, `MonthlyMembershipTarget`) VALUES ('107da39a-e681-11e7-9439-70f395f16141',5)
+-- INSERT INTO clubmetadata(SocialClubID, MonthlyMembershipTarget) VALUES ('107da39a-e681-11e7-9439-70f395f16141',5)
 
-CREATE TABLE IF NOT EXISTS `members` (
-  `ID` varchar(50) NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
-  `Name` varchar(50) NOT NULL,
-  `Surname` varchar(50) NOT NULL,
-  `SocialClubID` varchar(50) NOT NULL,
-  `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`)
+CREATE TABLE IF NOT EXISTS members (
+  ID varchar(50) NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
+  Name varchar(50) NOT NULL,
+  Surname varchar(50) NOT NULL,
+  SocialClubID varchar(50) NOT NULL,
+  CreationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
 );
 
 ALTER TABLE Members ADD CONSTRAINT FK_MemberSocialClubID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
 
-CREATE VIEW `socialclubstats` AS 
-select `s`.`ID` AS `ID`,`s`.`Name` AS `Name`,
-	(select count(0) from `members` 
-	where (`members`.`SocialClubID` = `s`.`ID`)) AS `Actual`,
+CREATE VIEW socialclubstats AS 
+select s.ID AS ID,s.Name AS Name,
 	(
-		select `clubmetadata`.`MonthlyMembershipTarget` from `clubmetadata` 
-		where ((`clubmetadata`.`SocialClubID` = `s`.`ID`) 
-		and (`clubmetadata`.`CreationDate` = 
+		select count(*) from members 
+		where (SocialClubID = s.ID)
+	) AS Actual,
+	(
+		select MonthlyMembershipTarget from clubmetadata 
+		where ((SocialClubID = s.ID) 
+		and (CreationDate = 
 				(
-					select max(`clubmetadata`.`CreationDate`) 
-					from `clubmetadata` where (`clubmetadata`.`SocialClubID` = `s`.`ID`))
+					select max(CreationDate) 
+					from clubmetadata where (SocialClubID = s.ID))
 				)				
 			)
-	) AS `Target` 
-from `socialclub` `s`;
+	) AS Target,
+	(
+		select MonthlyMembershipFee from clubmetadata 
+		where ((SocialClubID = s.ID) 
+		and (CreationDate = 
+				(
+					select max(CreationDate) 
+					from clubmetadata where (SocialClubID = s.ID))
+				)				
+			)
+	) AS Fee     
+from socialclub s;
+
+ALTER TABLE clubmetadata  ADD MonthlyMembershipFee DECIMAL(6,2) NULL  AFTER MonthlyMembershipTarget;
 -- Dummy data
 -- SET @UUID = UUID();
 -- INSERT INTO SocialClub (ID, Name) VALUES (@UUID, 'My Club');

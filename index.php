@@ -1,3 +1,41 @@
+<?php
+    $servername = "localhost";
+    $username = "gateway1_tasuser";
+    $password = "tasuser123";
+    $dbname = "gateway1_tas";
+    $mysql_table = "members";
+
+    $conn = new mysqli($servername, $username, $password, '');
+    $msg = "";
+    $notify = "";
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error."<br>");
+    } 
+    if (!$conn->select_db($dbname)) {
+        die( "Error: Failed to select database '$dbname' ".$conn->error."<br>");
+    }
+    //Get Social club data
+    $clubName = "";
+    if (isset($_GET['name']))
+    {
+        $clubName = $_GET['name'];
+        $sql = "SELECT ID, Name, CreationDate FROM socialclub ORDER BY Name";
+        $result = $conn->query($sql);
+        if (!$conn->query($sql)) {
+            echo "$sql<br>";
+            die( "Error: Failed to return data from table SocialClub ".$conn->error."<br>");
+        }
+        
+    }
+    //////////////////////Get social clubs//////////////////////
+    $sql = "SELECT ID, Name, CreationDate FROM socialclub ORDER BY Name";
+    $result = $conn->query($sql);
+    if (!$conn->query($sql)) {
+        echo "$sql<br>";
+        die( "Error: Failed to return data from table SocialClub ".$conn->error."<br>");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,15 +106,24 @@
                         <div class="tm-container text-xs-center tm-section-1-inner">
 <!--                            <img src="img/tm-lumino-logo.png" alt="Logo" class="tm-logo">-->
                             <h1 class="tm-site-name">Social Club</h1>
-                            <p class="tm-intro-text">Investment tracking</p>
                             <form>
                                 <table>
-                                    <tr>
-                                        <td><input id="user" type="text" placeholder="User name"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input id="password" type="password" placeholder="Password"></td>
-                                    </tr>
+<?php
+                                        
+    if ($result->num_rows > 0) {
+        $rowsremaining = $result->num_rows;
+        $row = $result->fetch_assoc();
+
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()) {
+            echo '  <tr>
+                        <td>
+                            <a href="./index.php?name='.$row["Name"].'" class="tm-intro-link">'.$row["Name"].'</a>
+                        </td>
+                    </tr>';
+        }
+    }
+?>
                                     <tr>
                                         <td>
                                             <script>
@@ -85,8 +132,8 @@
                                                     document.location = "./#register";
                                                 }
                                             </script>
-                                            <a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>    
-                                            <a class="btn tm-light-blue-bordered-btn" onclick="return setUrl()">Register</a>                                                
+                                            <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
+                                            <a class="btn tm-light-blue-bordered-btn" onclick="return setUrl()">Register club</a>                                                
                                         </td>
                                     </tr>
                                 </table>                                
@@ -117,16 +164,8 @@
                             </script>
                             
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container">
-                                <!--<h2 class="tm-news-title dark-gray-text">Membership Details</h2>-->
-                                <iframe src="frames/memberdetailsform.php" style="width:200px;height:245px" frameborder="0" scrolling="no">
+                                <iframe src="frames/memberdetailsform.php?club=<?php echo $clubName ?>" style="width:100%;height:245px" frameborder="0" scrolling="no">
                                 </iframe><br><br>                                
-                                <!--<table>
-                                    <tr>
-                                        <label id="lblname"></label>
-                                    </tr>
-                                </table>-->
-<!--                                <p class="tm-news-text">Lumino theme is a Bootstrap 4.0 mobile compatible layout for your website. Check "columns" page for one, two, three columns and tables.</p>-->
-                                <!--<a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Preview</a>-->
                             </div>
                         </div>
 
@@ -283,9 +322,9 @@
 
                 <div id="register" class="modalDialog">
                     <div>
-                        <a href="#close" title="Close" class="close">X</a>
+                        <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
                         <center>
-                        <iframe src="frames/registrationform.php" frameborder="0" scrolling="no" style="height: 300px">
+                        <iframe src="frames/clubregistrationform.php" frameborder="0" scrolling="no" style="height: 300px">
                         </iframe>
                         </center>
                     </div>                                                
@@ -409,6 +448,9 @@
             function reloadFrame() {
                 document.getElementById('invgraph').contentWindow.location = "frames/investmentgraph.php?clubname=Hammanskraal%20Social";
                 document.getElementById('invdata').contentWindow.location = "frames/investmentdata.php?clubname=Hammanskraal%20Social";
+            }
+            function reloadPage() {
+                window.location.reload(false);
             }
 
         </script>             

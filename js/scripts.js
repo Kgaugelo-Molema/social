@@ -16,23 +16,23 @@ function checkclubname(form)
     }
 }
     
-function checkmemberfields(form)
+function checksocialclubfields(form)
 {
-    if (validString(form.membername.value) == false)
+    if (validString(form.clubname.value) == false)
     {
-        alert("Name field cannot be empty")
+        alert("Please enter club name")
         return false
     }
 
-    if (validString(form.membersurname.value) == false)
+    if (validString(form.target.value) == false)
     {
-        alert("Surname field cannot be empty")
+        alert("Please enter monthly membership target")
         return false
     }
     
-    if (validString(form.clubid.value) == false)
+    if (validString(form.fee.value) == false)
     {
-        alert("Please select a social club")
+        alert("Please enter monthly membership fee")
         return false
     }
 }
@@ -46,4 +46,16 @@ function checkclubname(form)
     }
 }
 
-
+function checkmemberfields(form)
+{
+    if (validString(form.membername.value) == false)
+    {
+        alert("Please enter member name")
+        return false
+    }
+    if (validString(form.membersurname.value) == false)
+    {
+        alert("Please enter member surname")
+        return false
+    }
+}
