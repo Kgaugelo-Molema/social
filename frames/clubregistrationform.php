@@ -3,7 +3,7 @@ $servername = "localhost";
 $username = "gateway1_tasuser";
 $password = "tasuser123";
 $dbname = "gateway1_tas";
-$mysql_table = "SocialClub";
+$mysql_table = "socialclub";
 
 $conn = new mysqli($servername, $username, $password, '');
 $msg = "";

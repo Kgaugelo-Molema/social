@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $membername = $_POST["membername"];
     $membersurname = $_POST["membersurname"];
                 $sqlText = "SELECT m.ID, m.Name, m.Surname FROM socialclub s
-                       JOIN Members m ON m.SocialClubID = s.ID
+                       JOIN members m ON m.SocialClubID = s.ID
                        WHERE s.Name = '$clubName' AND m.Name = '$membername' AND m.Surname = '$membersurname'";
     $result = $conn->query($sqlText);
     if (!$conn->query($sqlText)) {
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $msg = "$membername $membersurname is already a member of the social club.";
     }
     //$clubid = $_POST["clubid"];
-    $sqlText = "SELECT ID FROM SocialClub WHERE Name = '$clubName'";
+    $sqlText = "SELECT ID FROM socialclub WHERE Name = '$clubName'";
     $result = $conn->query($sqlText);
     if (!$conn->query($sqlText)) {
         echo "$sqltext<br>";
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             if (isset($_GET["club"])) {   
                 $clubName = $_GET["club"];
                 $sql = "SELECT m.ID, m.Name, m.Surname FROM socialclub s
-                       JOIN Members m ON m.SocialClubID = s.ID
+                       JOIN members m ON m.SocialClubID = s.ID
                        WHERE s.Name = '$clubName'";
                 $result = $conn->query($sql);
                 if (!$conn->query($sql)) {
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     while($row = $result->fetch_assoc()) {
                         //echo '<option value="'.$row["ID"].'"> '.$row["Name"].'</option>';
                         echo   "<tr>
-                                    <td>".$row["Name"]. "</td><td>" .$row["Surname"]."</td>
+                                    <td>".$row["Name"]."</td><td>&nbsp;</td><td>".$row["Surname"]."</td>
                                 </tr>";
                     }
                     echo    "</tbody>
