@@ -19,8 +19,8 @@ if (!$conn->select_db($dbname)) {
 //////////////////////Get social club details//////////////////////
 $clubid = "";
 if (isset($_GET["clubname"])) {
-    $clubName = $_GET("clubname");
-    $sql = "SELECT ID, Name, CreationDate FROM socialclub WHERE ClubName = '$clubName'";
+    $clubName = $_GET["clubname"];
+    $sql = "SELECT ID, Name, CreationDate FROM socialclub WHERE Name = '$clubName'";
     $result = $conn->query($sql);
     if (!$conn->query($sql)) {
         echo "$sql<br>";
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <script src="../js/scripts.js"></script>
     </head>
     <body>
-        <div class="tm-intro tm-detail modalForm">
+        <div class="tm-intro tm-detail">
             <section id="tm-section-1">
                 <div class="tm-container text-xs-center tm-section-1-inner">
                     <p>Club Contributions</p>
@@ -73,41 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                 </tr>
                                 <tr>
                                     <td>
-                                        <select name="clubid" onchange="return reloadPage(this.form)">
-                                            <option value="none">--Select Social Club--</option>
-<?php
-                                            if ($clubid != "") {
-                                                if ($result->num_rows > 0) {
-                                                    $rowsremaining = $result->num_rows;
-                                                    $row = $result->fetch_assoc();
-
-                                                    $result = $conn->query($sql);
-                                                    while($row = $result->fetch_assoc()) {
-                                                        if (isset($_GET["clubid"])) {
-                                                            $clubid = $_GET["clubid"];
-                                                            if ($row["ID"] == $clubid)
-                                                                echo '<option selected="true" value="'.$row["ID"].'"> '.$row["Name"].'</option>';
-                                                        }
-                                                        else {
-                                                            echo '<option value="'.$row["ID"].'"> '.$row["Name"].'</option>';
-                                                        }
-                                                    }
-                                                }
-                                            }
-?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         <select name="memberid">
                                             <option value="none">--Select Club Member--</option>
 <?php
                                             //////////////////////Get social clubs members//////////////
-                                            if (isset($_GET["clubid"]))
+                                            if (isset($_GET["clubname"]) & $clubid != "")
                                             {
-                                                $clubId = $_GET["clubid"];
-                                                $sql = "SELECT ID, Name, Surname, CreationDate FROM members WHERE SocialClubID = '$clubId' ORDER BY Name";
+                                                $sql = "SELECT ID, Name, Surname, CreationDate FROM members WHERE SocialClubID = '$clubid' ORDER BY Name";
                                                 $result = $conn->query($sql);
                                                 if (!$conn->query($sql)) {
                                                     echo "$sql<br>";

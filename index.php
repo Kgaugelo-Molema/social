@@ -176,13 +176,9 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container flex-order-1">
-                                <h2 class="tm-news-title dark-gray-text">Contributions</h2>
-                                <table>
-                                    <tr>
-                                        <td>R 1,000.00 / month</td>
-                                    </tr>
-                                </table>
-                                <iframe id="memfees" src="frames/clubcontributionform.php?clubname=<?php echo $clubName ?>" style="width:500px;height:380px" frameborder="0" scrolling="no">
+                                <!--<h2 class="tm-news-title dark-gray-text">Contributions</h2>
+                                <p>R 1,000.00 / month</p>-->
+                                <iframe id="memfees" src="frames/clubcontributionform.php?clubname=<?php echo $clubName ?>" style="width:500px;height:250px" frameborder="0" scrolling="no">
                                 </iframe>
 <!--                                <p class="tm-news-text">You may download, modify and use this template as you wish. Lumino HTML5 template is a fully responsive mobile ready for any kind of website.</p>-->
                                 <a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Detail</a>
