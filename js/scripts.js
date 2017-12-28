@@ -59,3 +59,22 @@ function checkmemberfields(form)
         return false
     }
 }
+
+function checkcontributionfields(form)
+{
+    if (validString(form.clubid.value) == false)
+    {
+        alert("Please select social club")
+        return false
+    }    
+    if (validString(form.memberid.value) == false)
+    {
+        alert("Please select club member")
+        return false
+    }    
+    if (validString(form.fee.value) == false)
+    {
+        alert("Please enter member contribution")
+        return false
+    }    
+}

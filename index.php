@@ -182,6 +182,8 @@
                                         <td>R 1,000.00 / month</td>
                                     </tr>
                                 </table>
+                                <iframe id="memfees" src="frames/clubcontributionform.php?clubname=<?php echo $clubName ?>" style="width:500px;height:380px" frameborder="0" scrolling="no">
+                                </iframe>
 <!--                                <p class="tm-news-text">You may download, modify and use this template as you wish. Lumino HTML5 template is a fully responsive mobile ready for any kind of website.</p>-->
                                 <a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Detail</a>
                             </div>
@@ -446,8 +448,8 @@
             });
             window.setInterval(function() {reloadFrame()},60000);
             function reloadFrame() {
-                document.getElementById('invgraph').contentWindow.location = "frames/investmentgraph.php?clubname=Hammanskraal%20Social";
-                document.getElementById('invdata').contentWindow.location = "frames/investmentdata.php?clubname=Hammanskraal%20Social";
+                document.getElementById('invgraph').contentWindow.location = "frames/investmentgraph.php?clubname=<?php echo $clubName ?>";
+                document.getElementById('invdata').contentWindow.location = "frames/investmentdata.php?clubname=<?php echo $clubName ?>";
             }
             function reloadPage() {
                 window.location.reload(false);

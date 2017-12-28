@@ -61,6 +61,19 @@ select s.ID AS ID,s.Name AS Name,
 from socialclub s;
 
 ALTER TABLE clubmetadata  ADD MonthlyMembershipFee DECIMAL(6,2) NULL  AFTER MonthlyMembershipTarget;
+
+CREATE TABLE IF NOT EXISTS `clubfees` (
+  `ID` varchar(50) NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000',
+  `SocialClubID` varchar(50) NOT NULL,
+  `MemberID` varchar(50) NOT NULL,
+  `Contribution` decimal(6,2) NOT NULL,
+  `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+)
+
+ALTER TABLE clubfees ADD CONSTRAINT FK_SocialClubFeeID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
+ALTER TABLE clubfees ADD CONSTRAINT FK_MemberFeeID FOREIGN KEY (MemberID) REFERENCES Members(ID);
+
 -- Dummy data
 -- SET @UUID = UUID();
 -- INSERT INTO SocialClub (ID, Name) VALUES (@UUID, 'My Club');
