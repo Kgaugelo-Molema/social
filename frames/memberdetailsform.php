@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "$sqltext<br>";
         die( "Error: Failed to get data from '$mysql_table' ".$conn->error."<br>");
     }
+    $memberExists = $result->num_rows > 0;
     if ($result->num_rows > 0) {
         $msg = "$membername $membersurname is already a member of the social club.";
     }
-
     //$clubid = $_POST["clubid"];
     $sqlText = "SELECT ID FROM SocialClub WHERE Name = '$clubName'";
     $result = $conn->query($sqlText);
@@ -40,10 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "$sqltext<br>";
         die( "Error: Failed to get data from 'SocialClub'<br>".$conn->error."<br>");
     }
-    if ($result->num_rows = 0) {
-        //$msg = "'$clubName' is an invalid social club name.";
+    
+    $clubNameValid = ($result->num_rows != 0);
+    if ($result->num_rows == 0) {
+        $msg = "'$clubName' is an invalid social club name.";
     }
-    else {
+    
+    if($clubNameValid & !$memberExists) {
         while($row = $result->fetch_assoc()) {
             $clubid = $row["ID"];                    
         }
@@ -53,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             die( "Error: Failed to insert data into table '$mysql_table' ".$conn->error."<br>");
         }        
         $notify = "Member added to social club.";
+        header("Location:./memberdetailsform.php?club=$clubName");
     }
 }
 ?>
@@ -126,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     while($row = $result->fetch_assoc()) {
                         //echo '<option value="'.$row["ID"].'"> '.$row["Name"].'</option>';
                         echo   "<tr>
-                                    <td>".$row["Name"]."</td><td>".$row["Surname"]."</td>
+                                    <td>".$row["Name"]. "</td><td>" .$row["Surname"]."</td>
                                 </tr>";
                     }
                     echo    "</tbody>
