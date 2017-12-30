@@ -32,9 +32,12 @@ if (!$conn->select_db($dbname)) {
             $clubName = "";
             if (isset($_GET["club"])) {   
                 $clubName = $_GET["club"];
-                $sql = "SELECT m.ID, m.Name, m.Surname FROM socialclub s
-                       JOIN members m ON m.SocialClubID = s.ID
-                       WHERE s.Name = '$clubName'";
+                $sql = "SELECT s.Name, m.Name, m.Surname, ifnull(c.Details,'') \"Details\", ifnull(c.Contribution,0) \"Contribution\"
+                        FROM socialclub s
+                        LEFT JOIN members m ON s.ID = m.SocialClubID
+                        LEFT JOIN clubfees c ON m.ID = c.MemberID
+                        WHERE s.Name = '$clubName'
+                        ORDER BY m.Name";
                 $result = $conn->query($sql);
                 if (!$conn->query($sql)) {
                     echo "$sql<br>";
@@ -50,7 +53,7 @@ if (!$conn->select_db($dbname)) {
                             <tbody>";
                     while($row = $result->fetch_assoc()) {
                         echo   "<tr>
-                                    <td>".$row["Name"]."</td><td>&nbsp;</td><td>".$row["Surname"]."</td>
+                                    <td>".$row["Name"]."</td><td>&nbsp;</td><td>".$row["Surname"]."</td><td>&nbsp;</td><td>".$row["Details"]."</td><td>&nbsp;</td><td>".$row["Contribution"]."</td>
                                 </tr>";
                     }
                     echo    "</tbody>

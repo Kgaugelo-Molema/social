@@ -18,8 +18,8 @@ if (!$conn->select_db($dbname)) {
 
 //////////////////////Get social club details//////////////////////
 $clubid = "";
-if (isset($_GET["clubname"])) {
-    $clubName = $_GET["clubname"];
+if (isset($_GET["club"])) {
+    $clubName = $_GET["club"];
     $sql = "SELECT ID, Name, CreationDate FROM socialclub WHERE Name = '$clubName'";
     $result = $conn->query($sql);
     if (!$conn->query($sql)) {
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                             <option value="none">--Select Club Member--</option>
 <?php
                                             //////////////////////Get social clubs members//////////////
-                                            if (isset($_GET["clubname"]) & $clubid != "")
+                                            if (isset($_GET["club"]) & $clubid != "")
                                             {
                                                 $sql = "SELECT ID, Name, Surname, CreationDate FROM members WHERE SocialClubID = '$clubid' ORDER BY Name";
                                                 $result = $conn->query($sql);

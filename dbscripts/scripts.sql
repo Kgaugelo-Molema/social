@@ -110,4 +110,9 @@ DELETE FROM members WHERE
 DELETE FROM clubmetadata WHERE SocialClubID IN (SELECT ID FROM socialclub WHERE Name = @ClubName);
 DELETE FROM socialclub WHERE Name = @ClubName;
 
+SELECT s.Name, m.Name, c.Details, c.Contribution 
+FROM socialclub s
+LEFT JOIN members m ON s.ID = m.SocialClubID
+LEFT JOIN clubfees c ON m.ID = c.MemberID
+ORDER BY m.Name
 */

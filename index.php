@@ -168,15 +168,15 @@
                                 <iframe src="frames/memberlist.php?club=<?php echo $clubName ?>" style="width:100%;height:145px" frameborder="0" scrolling="no">
                                 </iframe><br><br>                                
                                 <script>
-                                    function setMemberDetailsUrl(clubname)
+                                    function setDetailsUrl(clubmembersection)
                                     {   //this forces the address on the browser
                                         //document.location = "./?name=<?php echo $clubName ?>#memberdetails";
-                                        document.location = "./?name=" + clubname + "#memberdetails";
+                                        document.location = "./?name=" + clubmembersection;
                                     }
                                 </script>
                                 <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
                                 <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
-                                <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setMemberDetailsUrl('<?php echo $clubName ?>')">Add Member</a>                                                
+                                <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setDetailsUrl('<?php echo $clubName ?>#memberdetails')">Add Member</a>                                                
                             </div>
                         </div>
 
@@ -189,10 +189,11 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container flex-order-1">
                                 <!--<h2 class="tm-news-title dark-gray-text">Contributions</h2>
                                 <p>R 1,000.00 / month</p>-->
-                                <iframe id="memfees" src="frames/clubcontributionform.php?clubname=<?php echo $clubName ?>" style="width:500px;height:250px" frameborder="0" scrolling="no">
-                                </iframe>
+                                <iframe id="memfees" src="frames/clubcontributions.php?club=<?php echo $clubName ?>" style="width:500px;height:150px" frameborder="0" scrolling="no">
+                                </iframe><br><br>
 <!--                                <p class="tm-news-text">You may download, modify and use this template as you wish. Lumino HTML5 template is a fully responsive mobile ready for any kind of website.</p>-->
-                                <a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Detail</a>
+                                <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setDetailsUrl('<?php echo $clubName ?>#contributionsdetails')">Add Contributions</a>                                                
+                                
                             </div>
                         </div>
 
@@ -201,6 +202,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-item-img-container">
                             <iframe id="invgraph" src="frames/investmentgraph.php?clubname=<?php echo $clubName ?>" style="width:500px;height:380px" frameborder="0" scrolling="no">
                             </iframe>
+                            
 <!--                                <img src="img/tm-600x300-03.jpg" alt="Image" class="img-fluid tm-news-item-img">-->
                             </div>
 
@@ -345,7 +347,6 @@
                         <center>
 <?php                            
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    //if (isset($_POST["clubnamehidden"]))
     {
         $clubName = $_POST["clubnamehidden"];
         echo "Posted Club: $clubName<br>";
@@ -357,6 +358,23 @@
                     </div>                                                
                 </div> 
 
+                <div id="contributionsdetails" class="modalDialog">
+                    <div>
+                        <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
+                        <center>
+<?php                            
+    if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        $clubName = $_POST["clubnamehidden"];
+        echo "Posted Club: $clubName<br>";
+    }
+?>
+                            <iframe name="contributionsframe" src="frames/clubcontributionform.php?club=<?php echo $clubName ?>" frameborder="0" scrolling="no" style="height: 300px">
+                            </iframe>
+                        </center>
+                    </div>                                                
+                </div> 
+                
                 <!-- footer -->
                 <footer class="tm-footer">                
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
