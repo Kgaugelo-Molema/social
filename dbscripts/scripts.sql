@@ -57,7 +57,14 @@ select s.ID AS ID,s.Name AS Name,
 					from clubmetadata where (SocialClubID = s.ID))
 				)				
 			)
-	) AS Fee     
+	) AS Fee,
+	(
+		SELECT SUM(c.Contribution)
+		FROM socialclub s1
+		LEFT JOIN members m ON s1.ID = m.SocialClubID
+		LEFT JOIN clubfees c ON m.ID = c.MemberID
+		WHERE (s1.ID = s.ID)
+	) AS Contributions
 from socialclub s;
 
 ALTER TABLE clubmetadata  ADD MonthlyMembershipFee DECIMAL(6,2) NULL  AFTER MonthlyMembershipTarget;

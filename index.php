@@ -83,7 +83,7 @@
                                 <a class="nav-link" href="#tm-section-2">Membership</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#tm-section-3">Gallery</a>
+                                <a class="nav-link" href="#tm-section-3">Stats</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#tm-section-4">Contact Us</a>
@@ -133,7 +133,6 @@
                                                     document.location = "./#register";
                                                 }
                                             </script>
-                                            <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
                                             <a class="btn tm-light-blue-bordered-btn" onclick="return setRegisterUrl()">Register club</a>                                                
                                         </td>
                                     </tr>
@@ -170,12 +169,10 @@
                                 <script>
                                     function setDetailsUrl(clubmembersection)
                                     {   //this forces the address on the browser
-                                        //document.location = "./?name=<?php echo $clubName ?>#memberdetails";
                                         document.location = "./?name=" + clubmembersection;
                                     }
                                 </script>
                                 <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
-                                <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
                                 <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setDetailsUrl('<?php echo $clubName ?>#memberdetails')">Add Member</a>                                                
                             </div>
                         </div>
@@ -187,46 +184,45 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container flex-order-1">
-                                <!--<h2 class="tm-news-title dark-gray-text">Contributions</h2>
-                                <p>R 1,000.00 / month</p>-->
                                 <iframe id="memfees" src="frames/clubcontributions.php?club=<?php echo $clubName ?>" style="width:500px;height:150px" frameborder="0" scrolling="no">
                                 </iframe><br><br>
-<!--                                <p class="tm-news-text">You may download, modify and use this template as you wish. Lumino HTML5 template is a fully responsive mobile ready for any kind of website.</p>-->
                                 <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setDetailsUrl('<?php echo $clubName ?>#contributionsdetails')">Add Contributions</a>                                                
                                 
                             </div>
                         </div>
 
+                    </div>                    
+               </div>
+
+            <!--BEGIN Summary data-->
+                <div id="tm-section-3" class="tm-section">
+                    <div class="tm-container tm-container-wide">
+
                         <div class="tm-news-item">
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-item-img-container">
-                            <iframe id="invgraph" src="frames/investmentgraph.php?clubname=<?php echo $clubName ?>" style="width:500px;height:380px" frameborder="0" scrolling="no">
-                            </iframe>
-                            
-<!--                                <img src="img/tm-600x300-03.jpg" alt="Image" class="img-fluid tm-news-item-img">-->
+                                <iframe id="invgraph" src="frames/investmentgraph.php?clubname=<?php echo $clubName ?>" style="width:500px;height:380px" frameborder="0" scrolling="no">
+                                </iframe>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container">
                                 <iframe id="invdata" src="frames/investmentdata.php?clubname=<?php echo $clubName ?>" style="width:300px;height:160px" frameborder="0" scrolling="no">
-                                </iframe><br><br>                                
-<!--                                <p class="tm-news-text">Credit goes to <a rel="nofollow" href="http://unsplash.com" target="_parent">Unsplash</a> for images used in this website template. Nulla sit amet tristique lacus. Etiam blandit ex vitae mauris gravida.</p>-->
-                                <a href="#" class="btn tm-light-blue-bordered-btn tm-news-link">Details</a>
+                                </iframe>                                
                             </div>
                         </div>
                     </div>                    
                </div>
-
-           </div> <!-- row -->
+                
+            <!--END Summary data-->
+                
+            </div> <!-- row -->
 
             <div class="row">
 
-                <section id="tm-section-3" class="tm-section">
+                <section id="tm-section-4" class="tm-section">
                     <div class="tm-container text-xs-center">
                         
                         <h2 class="blue-text tm-title">Media Gallery</h2>
-<!--                        <p class="margin-b-5">Etiam at rhoncus nisl. Nunc rutrum ac ante euismod cursus.</p>
-                        <p>Suspendisse imperdiet feugiat massa nex iaculis.</p>-->
-                       
                         <div class="tm-img-grid">
                             <div class="tm-gallery-img-container">
                                 <a href="img/tm-450x300-01.jpg" class="tm-gallery-img-link">

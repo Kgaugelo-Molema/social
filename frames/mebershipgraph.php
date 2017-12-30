@@ -20,15 +20,15 @@ $actual = 0;
 $target = 0;
 if (isset($_GET['clubname'])) {
     $clubName = $_GET['clubname'];
-    $sqlText = "SELECT ID, Name, Actual, Target, Fee, Contributions FROM $mysql_table WHERE Name = '$clubName'";
+    $sqlText = "SELECT ID, Name, Actual, Target FROM $mysql_table WHERE Name = '$clubName'";
     $result = $conn->query($sqlText);
     if (!$conn->query($sqlText)) {
         echo "$sqltext<br>";
         die( "Error: Failed to get data from '$mysql_table' ".$conn->error."<br>");
     }
     while($row = $result->fetch_assoc()) {
-        $actual = $row["Contributions"];
-        $target = ($row["Fee"] * $row["Target"]) - $row["Contributions"];
+        $actual = $row["Actual"];
+        $target = $row["Target"] - $row["Actual"];
     }
 }
 
@@ -48,7 +48,7 @@ if (isset($_GET['clubname'])) {
             var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                    labels: ['Contributions','Target'],					
+                    labels: ['Actual','Target'],					
                     datasets: [
                         {
 <?php                            
