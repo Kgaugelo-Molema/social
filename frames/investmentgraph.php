@@ -39,6 +39,7 @@ if (isset($_GET['clubname'])) {
     <script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script>
     <script src="../js/Chart.min.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="icon" type="image/png" href="../img/tm-lumino-logo.png">
 </head>
 <body>
     <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
@@ -54,7 +55,7 @@ if (isset($_GET['clubname'])) {
 <?php                       $actualf = number_format($actual, 2); 
                             $targetf = number_format($target, 2);
                             echo "label: '$clubName',";
-                            echo "data: [$actualf,$targetf],";						
+                            echo "data: [$actual,$target],";						
 ?>                                    
                             backgroundColor: [  'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',

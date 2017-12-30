@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <p>Club Registration</p>
                     <form name="clubdetails" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" id="form1">
                         <table>
-                            <tbody>
+                            <thead>
                                 <tr>
                                     <td style="color:red;"><?php echo $msg; ?></td>
                                 </tr>
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                 <tr>
                                     <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit" onclick="return checksocialclubfields(this.form)"></td>
                                 </tr>
-                            </tbody>
+                            </thead>
                         </table>
                     </form>
                 </div>

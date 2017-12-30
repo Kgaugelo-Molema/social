@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <form name="memberdetails" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" id="form1">
                         <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
                         <table>
-                            <tbody>
+                            <thead>
                                 <tr>
                                     <td style="color:red;"><?php echo $msg; ?></td>
                                 </tr>
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                 <tr>
                                     <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit" onclick="return checkmemberfields(this.form)"></td>
                                 </tr>
-                            </tbody>
+                            </thead>
                         </table>
                     </form>
                 </div>

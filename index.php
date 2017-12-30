@@ -210,7 +210,7 @@
 
             <div class="row">
 
-                <section id="tm-section-4" class="tm-section">
+                <section id="tm-section-5" class="tm-section">
                     <div class="tm-container text-xs-center">
                         
                         <h2 class="blue-text tm-title">Media Gallery</h2>
@@ -317,7 +317,7 @@
                         </div>
                     </div>                    
                 </section>
-
+<!--BEGIN Modal Dialogs-->
                 <div id="register" class="modalDialog">
                     <div>
                         <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
@@ -361,6 +361,7 @@
                         </center>
                     </div>                                                
                 </div> 
+<!--END Modal Dialogs-->
                 
                 <!-- footer -->
                 <footer class="tm-footer">                

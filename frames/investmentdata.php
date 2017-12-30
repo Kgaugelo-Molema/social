@@ -38,6 +38,7 @@ if (isset($_GET['clubname'])) {
 <head>
     <script src="../js/Chart.min.js"></script>
     <link rel="stylesheet" href="../css/templatemo-style.css">                                   <!-- Templatemo style -->
+    <link rel="icon" type="image/png" href="../img/tm-lumino-logo.png">
 </head>
 <body>
     <h2 class="tm-news-title dark-gray-text"><?php echo $clubName ?></h2>
