@@ -67,9 +67,10 @@ CREATE TABLE IF NOT EXISTS `clubfees` (
   `SocialClubID` varchar(50) NOT NULL,
   `MemberID` varchar(50) NOT NULL,
   `Contribution` decimal(6,2) NOT NULL,
+  Details varchar(100) NOT NULL DEFAULT 'Joining Fee',
   `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-)
+);
 
 ALTER TABLE clubfees ADD CONSTRAINT FK_SocialClubFeeID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
 ALTER TABLE clubfees ADD CONSTRAINT FK_MemberFeeID FOREIGN KEY (MemberID) REFERENCES Members(ID);

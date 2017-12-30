@@ -33,6 +33,17 @@ if (isset($_GET["clubname"])) {
 ////////////////////////////////////////////////////////////
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+    $clubName = $_POST["clubnamehidden"];
+    $sql = "SELECT ID, Name, CreationDate FROM socialclub WHERE Name = '$clubName'";
+    $result = $conn->query($sql);
+    if (!$conn->query($sql)) {
+        echo "$sql<br>";
+        die( "Error: Failed to return data from table SocialClub ".$conn->error."<br>");
+    }
+    while($row = $result->fetch_assoc()) {
+        $clubid = $row["ID"];
+    }
+
     if ($clubid != "") {
         $memberid = $_POST["memberid"];
         $fee = $_POST["fee"];
@@ -63,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <div class="tm-container text-xs-center tm-section-1-inner">
                     <p>Club Contributions</p>
                     <form name="clubcontributions" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" id="form1">
+                        <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
                         <table>
                             <tbody>
                                 <tr>

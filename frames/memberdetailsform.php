@@ -16,6 +16,10 @@ if (!$conn->select_db($dbname)) {
 	die( "Error: Failed to select database '$dbname' ".$conn->error."<br>");
 }
 
+$clubName = "";
+if (isset($_GET["club"])) {   
+    $clubName = $_GET["club"];
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $clubName = $_POST["clubnamehidden"];
@@ -74,14 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <div class="tm-container text-xs-center tm-section-1-inner">
                     <p class="intro-text">Member Details</p>
                     <form name="memberdetails" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" id="form1">
-<?php
-    if (isset($_GET["club"])) { 
-        $clubName = $_GET["club"];
-        echo "Club: $clubName<br>";
-        echo '<input name="clubnamehidden" type="hidden" value="'.$clubName.'">';
-    }    
-?>
-
+                        <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
                         <table>
                             <tbody>
                                 <tr>

@@ -28,6 +28,7 @@
         }
         
     }
+
     //////////////////////Get social clubs//////////////////////
     $sql = "SELECT ID, Name, CreationDate FROM socialclub ORDER BY Name";
     $result = $conn->query($sql);
@@ -167,19 +168,15 @@
                                 <iframe src="frames/memberlist.php?club=<?php echo $clubName ?>" style="width:100%;height:145px" frameborder="0" scrolling="no">
                                 </iframe><br><br>                                
                                 <script>
-                                    function setMemberDetailsUrl()
+                                    function setMemberDetailsUrl(clubname)
                                     {   //this forces the address on the browser
-                                        document.location = "./#memberdetails";
-                                        //var fra = document.getElementsByName("memberframe")[0];
-                                        //var club = document.getElementsByName("clubnamehidden")[0];
-                                        //fra.src = "frames/memberdetailsform.php?club="+club;
+                                        //document.location = "./?name=<?php echo $clubName ?>#memberdetails";
+                                        document.location = "./?name=" + clubname + "#memberdetails";
                                     }
                                 </script>
+                                <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
                                 <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
-                                <form method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data">
-                                    <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
-                                    <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setMemberDetailsUrl()">Add Member</a>                                                
-                                </form>
+                                <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setMemberDetailsUrl('<?php echo $clubName ?>')">Add Member</a>                                                
                             </div>
                         </div>
 
@@ -348,6 +345,7 @@
                         <center>
 <?php                            
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    //if (isset($_POST["clubnamehidden"]))
     {
         $clubName = $_POST["clubnamehidden"];
         echo "Posted Club: $clubName<br>";
