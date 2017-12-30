@@ -43,14 +43,16 @@ if (isset($_GET['clubname'])) {
     <h2 class="tm-news-title dark-gray-text"><?php echo $clubName ?></h2>
     <table>
         <tr>
-            <td>Joining fees collected: </td>
+            <th>Joining fees collected: </th>
             <td>&nbsp;</td>
-            <td><?php echo $actual ?></td>
+            <td>R</td>
+            <td><?php echo number_format($actual, 2) ?></td>
         </tr>
         <tr>
-            <td>Joining fees to collect: </td>
+            <th>Joining fees to collect: </th>
             <td>&nbsp;</td>
-            <td><?php echo $target ?></td>
+            <td>R</td>
+            <td><?php echo number_format($target, 2) ?></td>
         </tr>
     </table>
 </body>

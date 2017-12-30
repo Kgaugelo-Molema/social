@@ -584,3 +584,9 @@ body.page-2 { padding-top: 80px; }
 .modalForm { min-height:300px; }
 
 .modalForm table { margin: 0 auto; }
+
+tbody td:nth-last-child(-n+2){text-align: right; font-weight: bold;}
+tbody th{text-align: left;}
+thead  th{
+    text-align: center;
+}

@@ -48,12 +48,13 @@ if (isset($_GET['clubname'])) {
             var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                    labels: ['Contributions','Target'],					
+                    labels: ['Contributions (R)','Target (R)'],					
                     datasets: [
                         {
-<?php                            
+<?php                       $actualf = number_format($actual, 2); 
+                            $targetf = number_format($target, 2);
                             echo "label: '$clubName',";
-                            echo "data: [$actual,$target],";						
+                            echo "data: [$actualf,$targetf],";						
 ?>                                    
                             backgroundColor: [  'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',

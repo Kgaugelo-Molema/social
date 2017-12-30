@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                             <tbody>";
                     while($row = $result->fetch_assoc()) {
                         echo   "<tr>
-                                    <td>".$row["Name"]."</td><td>&nbsp;</td><td>".$row["Surname"]."</td>
+                                    <th>".$row["Name"]."</th><td>&nbsp;</td><th>".$row["Surname"]."</th>
                                 </tr>";
                     }
                     echo    "</tbody>

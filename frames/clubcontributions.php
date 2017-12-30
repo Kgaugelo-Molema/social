@@ -53,7 +53,7 @@ if (!$conn->select_db($dbname)) {
                             <tbody>";
                     while($row = $result->fetch_assoc()) {
                         echo   "<tr>
-                                    <td>".$row["Name"]."</td><td>&nbsp;</td><td>".$row["Surname"]."</td><td>&nbsp;</td><td>".$row["Details"]."</td><td>&nbsp;</td><td>".$row["Contribution"]."</td>
+                                    <th>".$row["Name"]."</th><td>&nbsp;</td><th>".$row["Surname"]."</th><td>&nbsp;</td><th>".$row["Details"]."</th><td>&nbsp;</td><td>R</td><td>".number_format($row["Contribution"], 2)."</td>
                                 </tr>";
                     }
                     echo    "</tbody>
