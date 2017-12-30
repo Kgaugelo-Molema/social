@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `clubfees` (
 ALTER TABLE clubfees ADD CONSTRAINT FK_SocialClubFeeID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
 ALTER TABLE clubfees ADD CONSTRAINT FK_MemberFeeID FOREIGN KEY (MemberID) REFERENCES Members(ID);
 
+/*
 -- Dummy data
 -- SET @UUID = UUID();
 -- INSERT INTO SocialClub (ID, Name) VALUES (@UUID, 'My Club');
@@ -96,3 +97,16 @@ AND CreationDate = (SELECT MAX(CreationDate) FROM clubmetadata WHERE SocialClubI
 FROM SocialClub s
 LEFT JOIN Members m ON s.ID = m.SocialClubID 
 GROUP BY s.Name
+
+
+SET @ClubName = 'Test1';
+DELETE FROM clubfees WHERE 
+MemberID IN ( SELECT ID FROM members WHERE 
+				SocialClubID IN (SELECT ID FROM socialclub WHERE Name = @ClubName)
+			);
+DELETE FROM members WHERE
+  SocialClubID IN ( SELECT ID FROM socialclub WHERE Name = @ClubName);	
+DELETE FROM clubmetadata WHERE SocialClubID IN (SELECT ID FROM socialclub WHERE Name = @ClubName);
+DELETE FROM socialclub WHERE Name = @ClubName;
+
+*/

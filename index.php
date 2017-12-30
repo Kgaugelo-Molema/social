@@ -127,13 +127,13 @@
                                     <tr>
                                         <td>
                                             <script>
-                                                function setUrl()
+                                                function setRegisterUrl()
                                                 {   //this forces the address on the browser
                                                     document.location = "./#register";
                                                 }
                                             </script>
                                             <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
-                                            <a class="btn tm-light-blue-bordered-btn" onclick="return setUrl()">Register club</a>                                                
+                                            <a class="btn tm-light-blue-bordered-btn" onclick="return setRegisterUrl()">Register club</a>                                                
                                         </td>
                                     </tr>
                                 </table>                                
@@ -164,8 +164,22 @@
                             </script>
                             
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-news-container">
-                                <iframe src="frames/memberdetailsform.php?club=<?php echo $clubName ?>" style="width:100%;height:245px" frameborder="0" scrolling="no">
+                                <iframe src="frames/memberlist.php?club=<?php echo $clubName ?>" style="width:100%;height:145px" frameborder="0" scrolling="no">
                                 </iframe><br><br>                                
+                                <script>
+                                    function setMemberDetailsUrl()
+                                    {   //this forces the address on the browser
+                                        document.location = "./#memberdetails";
+                                        //var fra = document.getElementsByName("memberframe")[0];
+                                        //var club = document.getElementsByName("clubnamehidden")[0];
+                                        //fra.src = "frames/memberdetailsform.php?club="+club;
+                                    }
+                                </script>
+                                <!--<a href="#tm-section-2" class="btn tm-light-blue-bordered-btn" onclick="return setName()">Login</a>-->
+                                <form method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data">
+                                    <input name="clubnamehidden" type="hidden" value="<?php echo $clubName ?>">
+                                    <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setMemberDetailsUrl()">Add Member</a>                                                
+                                </form>
                             </div>
                         </div>
 
@@ -322,8 +336,25 @@
                     <div>
                         <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
                         <center>
-                        <iframe src="frames/clubregistrationform.php" frameborder="0" scrolling="no" style="height: 300px">
-                        </iframe>
+                            <iframe src="frames/clubregistrationform.php" frameborder="0" scrolling="no" style="height: 300px">
+                            </iframe>
+                        </center>
+                    </div>                              
+                </div> 
+
+                <div id="memberdetails" class="modalDialog">
+                    <div>
+                        <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
+                        <center>
+<?php                            
+    if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        $clubName = $_POST["clubnamehidden"];
+        echo "Posted Club: $clubName<br>";
+    }
+?>
+                            <iframe name="memberframe" src="frames/memberdetailsform.php?club=<?php echo $clubName ?>" frameborder="0" scrolling="no" style="height: 300px">
+                            </iframe>
                         </center>
                     </div>                                                
                 </div> 

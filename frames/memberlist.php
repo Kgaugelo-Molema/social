@@ -70,40 +70,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     </head>
     <body>
         <div class="tm-intro tm-detail">
-            <section id="tm-section-1">
-                <div class="tm-container text-xs-center tm-section-1-inner">
-                    <p class="intro-text">Member Details</p>
-                    <form name="memberdetails" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" id="form1">
+            <p>Member list</p>
 <?php
-    if (isset($_GET["club"])) { 
-        $clubName = $_GET["club"];
-        echo "Club: $clubName<br>";
-        echo '<input name="clubnamehidden" type="hidden" value="'.$clubName.'">';
-    }    
-?>
+            //////////////////////Get social club member data//////////////////////
+            $clubName = "";
+            if (isset($_GET["club"])) {   
+                $clubName = $_GET["club"];
+                echo "ClubID: $clubName";
+                $sql = "SELECT m.ID, m.Name, m.Surname FROM socialclub s
+                       JOIN members m ON m.SocialClubID = s.ID
+                       WHERE s.Name = '$clubName'";
+                $result = $conn->query($sql);
+                if (!$conn->query($sql)) {
+                    echo "$sql<br>";
+                    die( "Error: Failed to return social club members<br>".$conn->error."<br>");
+                }
+            ////////////////////////////////////////////////////////////
+                if ($result->num_rows > 0) {
+                    $rowsremaining = $result->num_rows;
+                    $row = $result->fetch_assoc();
 
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td style="color:red;"><?php echo $msg; ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="color:green;"><?php echo $notify; ?></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" placeholder="Name" name="membername" autofocus></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" placeholder="Surname" name="membersurname"></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="tm-intro-link tm-light-blue-bordered-btn" type="submit" onclick="return checkmemberfields(this.form)"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </section>
+                    $result = $conn->query($sql);
+                    echo "<table>
+                            <tbody>";
+                    while($row = $result->fetch_assoc()) {
+                        echo   "<tr>
+                                    <td>".$row["Name"]."</td><td>&nbsp;</td><td>".$row["Surname"]."</td>
+                                </tr>";
+                    }
+                    echo    "</tbody>
+                         </table>";
+                }
+            }
+?>
         </div>
     </body>
 </html>
