@@ -110,6 +110,12 @@
                             <form>
                                 <table>
                                     <thead>
+                                    <script>
+                                        function setClubUrl(clubname)
+                                        {   //this forces the address on the browser
+                                            document.location = "./?name=" + clubname + "#tm-section-2";
+                                        }
+                                    </script>
 <?php
                                         
     if ($result->num_rows > 0) {
@@ -322,7 +328,7 @@
                     <div>
                         <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
                         <center>
-                            <iframe src="frames/clubregistrationform.php" frameborder="0" scrolling="no" style="height: 300px">
+                            <iframe src="frames/clubregistrationform.php" frameborder="0" scrolling="no">
                             </iframe>
                         </center>
                     </div>                              
@@ -339,7 +345,7 @@
         echo "Posted Club: $clubName<br>";
     }
 ?>
-                            <iframe name="memberframe" src="frames/memberdetailsform.php?club=<?php echo $clubName ?>" frameborder="0" scrolling="no" style="height: 300px">
+                            <iframe name="memberframe" src="frames/memberdetailsform.php?club=<?php echo $clubName ?>" frameborder="0" scrolling="no">
                             </iframe>
                         </center>
                     </div>                                                
@@ -356,7 +362,7 @@
         echo "Posted Club: $clubName<br>";
     }
 ?>
-                            <iframe name="contributionsframe" src="frames/clubcontributionform.php?club=<?php echo $clubName ?>" frameborder="0" scrolling="no" style="height: 300px">
+                            <iframe name="contributionsframe" src="frames/clubcontributionform.php?club=<?php echo $clubName ?>" frameborder="0" scrolling="no">
                             </iframe>
                         </center>
                     </div>                                                
