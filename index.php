@@ -106,7 +106,9 @@
                     <section id="tm-section-1">                        
                         <div class="tm-container text-xs-center tm-section-1-inner">
 <!--                            <img src="img/tm-lumino-logo.png" alt="Logo" class="tm-logo">-->
-                            <h1 class="tm-site-name">Social Club</h1>
+<!--                            <h1 class="tm-site-name">Social Club</h1>-->
+                            <?php $menutext="Select / register a club"; if ($clubName!="") $menutext="$clubName selected"; ?>
+                            <h1 class="tm-site-name"><?php echo $menutext ?></h1>
                             <form>
                                 <table>
                                     <thead>
