@@ -86,6 +86,9 @@
                                 <a class="nav-link" href="#tm-section-3">Stats</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="#tm-section-5">Gallery</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="#tm-section-4">Contact Us</a>
                             </li>
 <!--                            <li class="nav-item">
@@ -121,8 +124,8 @@
 <?php
                                         
     if ($result->num_rows > 0) {
-        $rowsremaining = $result->num_rows;
-        $row = $result->fetch_assoc();
+        //$rowsremaining = $result->num_rows;
+        //$row = $result->fetch_assoc();
 
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
@@ -216,73 +219,35 @@
                 
             </div> <!-- row -->
 
+<?php 
+    $sql = "SELECT m.ID, m.Name, m.FileLocation, m.FileType, m.SocialClubID, m.CreationDate 
+            FROM clubmedia m JOIN socialclub s ON s.ID = m.SocialClubID WHERE s.Name = '$clubName'";
+    $result = $conn->query($sql);
+    if (!$conn->query($sql)) {
+        echo "$sql<br>";
+        die( "Error: Failed to return data from table clubmedia ".$conn->error."<br>");
+    }
+?>
             <div class="row">
 
                 <section id="tm-section-5" class="tm-section">
                     <div class="tm-container text-xs-center">
                         
                         <h2 class="blue-text tm-title">Media Gallery</h2>
-                        <div class="tm-img-grid">
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-01.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-01.jpg" alt="Image" class="img-fluid tm-gallery-img"> <!-- 300x200 -->
+                        <a class="btn tm-light-blue-bordered-btn tm-news-link" type="submit" onclick="return setDetailsUrl('<?php echo $clubName ?>#upload')">Add Media</a>
+                        <div class="tm-img-grid">                            
+<?php
+    while($row = $result->fetch_assoc()) {
+        $isImage = (substr($row["FileType"], 0, 5) == "image");
+        if ($isImage) {        
+        echo                '<div class="tm-gallery-img-container">
+                                <a href="'.$row["FileLocation"].'" class="tm-gallery-img-link">
+                                    <img src="'.$row["FileLocation"].'" alt="Image" class="img-fluid tm-gallery-img"> <!-- 300x200 -->
                                 </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-07.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-07.jpg" alt="Image" class="img-fluid tm-gallery-img">  
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-02.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-02.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>                           
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-09.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-09.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-03.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-03.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-08.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-08.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-10.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-10.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-04.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-04.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-05.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-05.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-11.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-11.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-06.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-06.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
-                            <div class="tm-gallery-img-container">
-                                <a href="img/tm-450x300-12.jpg" class="tm-gallery-img-link">
-                                    <img src="img/tm-450x300-12.jpg" alt="Image" class="img-fluid tm-gallery-img">
-                                </a>
-                            </div>
+                            </div>';
+        }
+    }
+?>
                         </div>
                     </div>
                 </section>
@@ -368,6 +333,16 @@
                             </iframe>
                         </center>
                     </div>                                                
+                </div> 
+
+                <div id="upload" class="modalDialog">
+                    <div>
+                        <a href="#close" title="Close" class="close" onclick="return reloadPage()">X</a>
+                        <center>
+                            <iframe src="imageupload.php?clubname=<?php echo $clubName ?>" frameborder="0" scrolling="no">
+                            </iframe>
+                        </center>
+                    </div>                              
                 </div> 
 <!--END Modal Dialogs-->
                 

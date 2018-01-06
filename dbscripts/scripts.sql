@@ -82,6 +82,17 @@ CREATE TABLE IF NOT EXISTS `clubfees` (
 ALTER TABLE clubfees ADD CONSTRAINT FK_SocialClubFeeID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
 ALTER TABLE clubfees ADD CONSTRAINT FK_MemberFeeID FOREIGN KEY (MemberID) REFERENCES Members(ID);
 
+CREATE TABLE IF NOT EXISTS clubmedia (
+  ID varchar(50) NOT NULL PRIMARY KEY,
+  Name varchar(200) NOT NULL,
+  FileLocation varchar(200) NOT NULL,
+  FileType varchar(50) NOT NULL,
+  SocialClubID varchar(50) NOT NULL,
+  CreationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP 
+);
+
+ALTER TABLE clubmedia ADD CONSTRAINT FK_SocialClubMediaID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
+
 /*
 -- Dummy data
 -- SET @UUID = UUID();
