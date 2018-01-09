@@ -12,15 +12,17 @@
 	session_start();
 	session_destroy();
 
-	include_once('../lib/php/global.inc.php');
+	include_once('lib/php/global.inc.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<title>PayWeb 3 - Initiate</title>
-		<link rel="stylesheet" href="../lib/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../lib/css/core.css">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="icon" type="image/png" href="../img/tm-lumino-logo.png">
+		<title>Meta Capture</title>
+		<link rel="stylesheet" href="lib/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/css/core.css">
 	</head>
 	<body>
 		<div class="container-fluid" style="min-width: 320px;">
@@ -34,13 +36,13 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="">
+<!--						<a class="navbar-brand" href="">
 							<img alt="PayGate" src="../lib/images/paygate_logo_mini.png" />
-						</a>
-						<span style="color: #f4f4f4; font-size: 18px; line-height: 45px; margin-right: 10px;"><strong>PayWeb 3</strong></span>
+						</a>-->
+<!--						<span style="color: #f4f4f4; font-size: 18px; line-height: 45px; margin-right: 10px;"><strong>PayWeb 3</strong></span>-->
 					</div>
 					<div class="collapse navbar-collapse" id="navbar-collapse">
-						<ul class="nav navbar-nav">
+<!--						<ul class="nav navbar-nav">
 							<li class="active">
 								<a href="/<?php echo $root; ?>/PayWeb3/index.php">Initiate</a>
 							</li>
@@ -50,14 +52,14 @@
 							<li>
 								<a href="/<?php echo $root; ?>/PayWeb3/simple_initiate.php">Simple initiate</a>
 							</li>
-						</ul>
+						</ul>-->
 					</div>
 				</div>
 			</nav>
 			<div style="background-color:#80b946; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Step 1: Initiate</strong></div>
 			<div class="container">
 				<form role="form" class="form-horizontal text-left" action="request.php" method="post" name="paygate_initiate_form">
-					<div class="form-group">
+<!--					<div class="form-group">
 						<label for="PAYGATE_ID" class="col-sm-3 control-label">PayGate ID</label>
 						<div class="col-sm-6">
 							<input type="text" name="PAYGATE_ID" id="PAYGATE_ID" class="form-control" value="10011072130" />
@@ -112,7 +114,7 @@
 						<div class="col-sm-6">
 							<input type="text" name="EMAIL" id="EMAIL" class="form-control" value="support@paygate.co.za" />
 						</div>
-					</div>
+					</div>-->
 					<br>
 					<div class="form-group">
 						<div class="col-sm-offset-4 col-sm-4">
@@ -188,7 +190,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
+<!--					<div class="form-group">
 						<label for="encryption_key" class="col-sm-3 control-label">Encryption Key</label>
 						<div class="col-sm-6">
 							<input type="text" name="encryption_key" id="encryption_key" class="form-control" value="secret" />
@@ -199,12 +201,12 @@
 						<div class=" col-sm-offset-4 col-sm-4">
 							<input type="submit" name="btnSubmit" class="btn btn-success btn-block" value="Calculate Checksum" />
 						</div>
-					</div>
+					</div>-->
 					<br>
 				</form>
 			</div>
 		</div>
-		<script type="text/javascript" src="../lib/js/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="lib/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
 	</body>
 </html>
