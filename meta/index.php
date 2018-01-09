@@ -203,6 +203,80 @@
 						</div>
 					</div>-->
 					<br>
+					<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-4">
+							<button type="button" class="btn btn-primary btn-block" data-toggle="collapse" data-target="#newFieldsDiv" aria-expanded="false" aria-controls="extraFieldsDiv">
+								Extra Fields
+							</button>
+						</div>
+					</div>
+					<div id="newFieldsDiv" class="collapse well well-sm">
+						<div class="form-group">
+							<label for="PAY_METHOD" class="col-sm-3 control-label">Pay Method</label>
+							<div class="col-sm-6">
+								<input type="text" name="PAY_METHOD" id="PAY_METHOD" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="PAY_METHOD_DETAIL" class="col-sm-3 control-label">Pay Method Detail</label>
+							<div class="col-sm-6">
+								<input type="text" name="PAY_METHOD_DETAIL" id="PAY_METHOD_DETAIL" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="NOTIFY_URL" class="col-sm-3 control-label">Notify URL</label>
+							<div class="col-sm-6">
+								<input type="text" name="NOTIFY_URL" id="NOTIFY_URL" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="USER1" class="col-sm-3 control-label">User Field 1</label>
+							<div class="col-sm-6">
+								<input type="text" name="USER1" id="USER1" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="USER2" class="col-sm-3 control-label">User Field 2</label>
+							<div class="col-sm-6">
+								<input type="text" name="USER2" id="USER2" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="USER3" class="col-sm-3 control-label">User Field 3</label>
+							<div class="col-sm-6">
+								<input type="text" name="USER3" id="USER3" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="VAULT" class="col-sm-3 control-label">Vault</label>
+							<div class="col-sm-6">
+								<div class="radio">
+									<label>
+										<input type="radio" name="VAULT" id="VAULTOFF" value="" checked>
+										No card Vaulting
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="VAULT" id="VAULTNO" value="0">
+										Don't Vault card
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="VAULT" id="VAULTYES" value="1">
+										Vault card
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="VAULT_ID" class="col-sm-3 control-label">Vault ID</label>
+							<div class="col-sm-6">
+								<input type="text" name="VAULT_ID" id="VAULT_ID" class="form-control" placeholder="optional" />
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
