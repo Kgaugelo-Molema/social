@@ -9,12 +9,19 @@ CREATE TABLE IF NOT EXISTS socialclub (
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE IF NOT EXISTS ClubMetaData (
-    ID varchar(50) NOT NULL,
-	SocialClubID varchar(50) NOT NULL,
-	MonthlyMembershipTarget smallint,
-    CreationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (ID)
+CREATE TABLE IF NOT EXISTS clubmetadata (
+  ID varchar(50) NOT NULL,
+  SocialClubID varchar(50) NOT NULL,
+  MonthlyMembershipTarget smallint(6) DEFAULT NULL,
+  MonthlyMembershipFee decimal(6,2) DEFAULT NULL,
+  Area VARCHAR(50) NOT NULL, 
+  Phase VARCHAR(50) NOT NULL, 
+  MinNoMembers smallint(6) NOT NULL, 
+  ActualNoMembers smallint(6), 
+  MemberTargetPerPhase smallint(6), 
+  TargetDate datetime NOT NULL,
+  CreationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
 );
 
 ALTER TABLE ClubMetaData ADD CONSTRAINT FK_MetaDataSocialClubID FOREIGN KEY (SocialClubID) REFERENCES SocialClub(ID);
